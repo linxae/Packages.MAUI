@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <pinCodeAuthorization:CodePage
-    x:Class="Packages.MAUI.App.Views.PinCodes.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.PinCodes.MaskedPinCodePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
     xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
     xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:Animations="clr-namespace:Mopups.Animations;assembly=Mopups"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.PinCodes"
-    x:DataType="viewModel:PinCodeViewModel"
+    x:DataType="viewModel:MaskedPinCodeViewModel"
     CallbackCodeFinished="{Binding UserCompletedCodeCommand}">
 
     <pinCodeAuthorization:CodePage.Header>
@@ -18,7 +19,7 @@
                 FontSize="36"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                Text="Verify Phone"
+                Text="Unlock your account"
                 TextColor="{AppThemeBinding Light=Black,
                                             Dark=White}" />
 
@@ -26,7 +27,7 @@
                 FontAttributes="Italic"
                 FontSize="14"
                 HorizontalOptions="Center"
-                Text="code has been sent to +351 912345678"
+                Text="Account number: 912345678"
                 TextColor="{AppThemeBinding Light=Black,
                                             Dark=White}" />
         </VerticalStackLayout>
@@ -37,7 +38,7 @@
             <Label
                 Margin="0,0,0,20"
                 FontSize="16"
-                Text="Didn’t get the verification code?" />
+                Text="Forgot your pin?" />
 
             <VerticalStackLayout
                 Padding="0,5,0,5"
@@ -50,7 +51,7 @@
                     FontAttributes="Bold"
                     FontSize="20"
                     HorizontalOptions="Center"
-                    Text="Resend code"
+                    Text="Reset pin"
                     TextColor="{AppThemeBinding Light=#007AFF,
                                                 Dark=#19B5FE}" />
             </VerticalStackLayout>
@@ -58,20 +59,31 @@
     </pinCodeAuthorization:CodePage.SubHeader>
 
     <pinCodeAuthorization:CodePage.CodeViewer>
-        <codeViewer:ShowCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}">
-            <codeViewer:ShowCodeViewer.ShapeViewer>
+        <codeViewer:MaskedCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}" MaskTimeout="250" MaskAppearanceSpeed="100">
+            <codeViewer:MaskedCodeViewer.ShapeViewer>
                 <RoundRectangle
                     CornerRadius="10"
                     Fill="{AppThemeBinding Light=White,
-                                           Dark={StaticResource DarkModeColor}}"
+                                            Dark={StaticResource DarkModeColor}}"
                     HeightRequest="50"
                     Stroke="{AppThemeBinding Light=Black,
-                                             Dark=White}"
+                                                Dark=White}"
                     StrokeThickness="5"
-                    WidthRequest="50" />
-            </codeViewer:ShowCodeViewer.ShapeViewer>
+                    WidthRequest="50"/>
+            </codeViewer:MaskedCodeViewer.ShapeViewer>
 
-            <codeViewer:ShowCodeViewer.PinCharacterLabel>
+            <codeViewer:MaskedCodeViewer.MaskShape>
+                <Ellipse
+                    WidthRequest="20"
+                    HeightRequest="20"
+                    Fill="Black"
+                    Stroke="Black"
+                    StrokeThickness="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </codeViewer:MaskedCodeViewer.MaskShape>
+
+            <codeViewer:MaskedCodeViewer.PinCharacterLabel>
                 <Label
                     FontAttributes="Bold"
                     FontSize="16"
@@ -79,8 +91,9 @@
                     TextColor="{AppThemeBinding Light=Black,
                                                 Dark=White}"
                     VerticalOptions="Center" />
-            </codeViewer:ShowCodeViewer.PinCharacterLabel>
-        </codeViewer:ShowCodeViewer>
+            </codeViewer:MaskedCodeViewer.PinCharacterLabel>
+            
+        </codeViewer:MaskedCodeViewer>
     </pinCodeAuthorization:CodePage.CodeViewer>
 
     <pinCodeAuthorization:CodePage.Keyboard>

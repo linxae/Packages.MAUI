@@ -6,11 +6,10 @@ on:
       - master
     paths:
       - 'src/PinCodes.Authorization/**'
-      - '!src/PinCodes.Authorization/readme.md'
-      
+
 jobs:
   build:
-    name: Build
+    name: Build & Push
     runs-on: windows-latest
     defaults:
       run:
@@ -27,10 +26,24 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
+    - name: Copying README file to the correct location
+      shell: bash
+      run: |
+        cp readme.md ../../Resources/Raw/readme_pincodeauthorization.md
+
+    - name: Removing table content for the NuGet platform README
+      shell: bash
+      run: |
+         awk '/<\/details>/ {print NR}' ../../Resources/Raw/readme_pincodeauthorization.md | xargs -I {} sed -i '1,{}d' ../../Resources/Raw/readme_pincodeauthorization.md
+
     - name: Build Project
       run: dotnet build --configuration Release
 
-    - name: Publish Nuget package
-      shell: powershell
-      run: |
-        dotnet nuget push $(cmd /r dir /s PinCodes.Authorization.Maui.*.nupkg /b) --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+    - name: Pack NuGet package
+      run: dotnet pack --configuration Release --output ./nupkg
+
+    - name: Publish NuGet package
+      env:
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+      run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_KEY --source https://api.nuget.org/v3/index.json
+
