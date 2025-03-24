@@ -26,7 +26,7 @@
 		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/PinCodes.Authorization</RepositoryUrl>
 		<PackageTags>.NET MAUI;Pincode;Pin Entry;Cross-platform;Mobile Development;Xamarin</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-		<PackageId>PinCodes.Authorization.Maui</PackageId>
+		<PackageId>Neptus.Maui.PinEntry</PackageId>
 		<AssemblyName>PinCodes.Authorization.Maui</AssemblyName>
 		<Version>2.1.0-preview</Version>
 	</PropertyGroup>
