@@ -1,6 +1,7 @@
 name: PinCodes.Authorization
 
 on:
+  workflow_dispatch: #on demand
   push:
     branches:
       - master
