@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cicd", "cicd", "{E0ADEC3C-1
 		.gitignore = .gitignore
 		.github\workflows\MAUIDays-publish.yml = .github\workflows\MAUIDays-publish.yml
 		.github\workflows\PinCodes-publish.yml = .github\workflows\PinCodes-publish.yml
+		.github\workflows\publish-pincodes-package.yml = .github\workflows\publish-pincodes-package.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F1F179B6-3F78-40F3-B815-98A58D0C61AD}"

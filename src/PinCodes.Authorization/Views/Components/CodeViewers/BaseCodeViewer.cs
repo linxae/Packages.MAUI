@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls.Shapes;
 using PinCodes.Authorization.Extensions;
+using System.ComponentModel;
 
 namespace PinCodes.Authorization.Views.Components.CodeViewers;
 
@@ -67,6 +68,16 @@ public abstract class BaseCodeViewer : ContentView
         Content = grid;
     }
 
+    protected override void OnBindingContextChanged()
+    {
+        if (ShapeViewer == null || _codeViewerLayouts.Count == 0)
+        {
+            throw new InvalidOperationException($"{this.GetType().Name} must have a ShapeViewer property set");
+        }
+
+        base.OnBindingContextChanged();
+    }
+
     public virtual void SetCode(string code)
     {
         Code = code;
@@ -120,6 +131,7 @@ public abstract class BaseCodeViewer : ContentView
             }
         }
     }
+       
 
     private void CreateLayout()
     {

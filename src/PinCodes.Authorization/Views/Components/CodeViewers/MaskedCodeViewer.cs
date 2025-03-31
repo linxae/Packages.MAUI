@@ -85,6 +85,21 @@ public partial class MaskedCodeViewer : BaseCodeViewer
         };
     }
 
+    protected override void OnBindingContextChanged()
+    {
+        if (PinCharacterLabel == null || _labels.Count == 0)
+        {
+            throw new InvalidOperationException($"{this.GetType().Name} must have a PinCharacterLabel property set");
+        }
+
+        if (MaskShape == null || _maskShapes.Count == 0)
+        {
+            throw new InvalidOperationException($"{this.GetType().Name} must have a MaskShape property set");
+        }
+
+        base.OnBindingContextChanged();
+    }
+
     private bool IsValidTimer => _uiTimer.Interval >= MIN_MASK_TIMEOUT;
 
     public override void SetCode(string code)

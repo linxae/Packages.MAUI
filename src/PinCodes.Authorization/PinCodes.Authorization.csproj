@@ -28,7 +28,7 @@
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageId>Neptus.Maui.PinEntry</PackageId>
 		<AssemblyName>PinCodes.Authorization.Maui</AssemblyName>
-		<Version>2.1.0-preview</Version>
+		<Version>2.1.1-preview</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
